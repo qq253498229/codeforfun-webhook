@@ -1,6 +1,7 @@
 version: "3"
 services:
   webhooks:
+    build: .
     image: registry.cn-qingdao.aliyuncs.com/wangdali/webhooks
     container_name: webhooks
     environment:
