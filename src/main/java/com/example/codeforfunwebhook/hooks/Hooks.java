@@ -15,6 +15,7 @@ public class Hooks {
   @Id
   @GenericGenerator(name = "uuid", strategy = "uuid")
   @GeneratedValue(generator = "uuid")
+  @Column(length = 32)
   private String id;
 
   @Column(nullable = false)
