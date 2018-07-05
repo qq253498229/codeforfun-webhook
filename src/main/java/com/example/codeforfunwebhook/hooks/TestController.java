@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.badRequest;
@@ -47,7 +48,7 @@ public class TestController {
 
     Hooks hooks = all.get(0);
 
-    String auth = "Basic " + hooks.getUsername() + ":" + hooks.getPassword();
+    String auth = "Basic " + new String(Base64.getEncoder().encode((hooks.getUsername() + ":" + hooks.getPassword()).getBytes()));
 
     OkHttpClient client = new OkHttpClient();
 
