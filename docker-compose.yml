@@ -8,8 +8,6 @@ services:
       TZ: Asia/Shanghai
     networks:
       - codeforfun-net
-    volumes:
-      - "./target:/var/jenkins_home/workspace/codeforfun-webhooks/target"
 networks:
   codeforfun-net:
     external:
