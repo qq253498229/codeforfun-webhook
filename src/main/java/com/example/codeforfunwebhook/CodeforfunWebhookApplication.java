@@ -1,5 +1,6 @@
 package com.example.codeforfunwebhook;
 
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -22,6 +23,7 @@ import static org.springframework.http.ResponseEntity.ok;
  */
 @SpringBootApplication
 @RestController
+@Slf4j
 public class CodeforfunWebhookApplication {
 
   @Value("${hooks.prefix}")
@@ -29,6 +31,7 @@ public class CodeforfunWebhookApplication {
 
   @PostMapping("/{projectName}/{token}")
   public ResponseEntity post(@PathVariable("projectName") String projectName, @PathVariable("token") String token) throws IOException {
+    log.debug("receive hooks. project name : " + projectName + ",token : " + token);
     if (ObjectUtils.isEmpty(projectName) || ObjectUtils.isEmpty(token)) {
       return badRequest().build();
     }
