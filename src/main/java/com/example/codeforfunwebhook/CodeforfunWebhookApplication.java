@@ -24,7 +24,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 public class CodeforfunWebhookApplication {
 
-  @Value("hooks.prefix")
+  @Value("${hooks.prefix}")
   private String hooksPrefix;
 
   @PostMapping("/{projectName}/{token}")
