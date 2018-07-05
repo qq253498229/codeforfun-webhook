@@ -42,24 +42,30 @@ public class TestController {
     if (CollectionUtils.isEmpty(all)) {
       return badRequest().build();
     }
+
+    // 发送请求
+
     Hooks hooks = all.get(0);
-    String url = "http://" + hooks.getUsername() + ":" + hooks.getPassword() + "@" + hooksPrefix + "/job/" + projectName + "/build?token=" + token;
-    run(url);
-    return ok().build();
-  }
 
-  private OkHttpClient client = new OkHttpClient();
+    String auth = "Basic " + hooks.getUsername() + ":" + hooks.getPassword();
 
-  private String run(String url) throws IOException {
-    log.debug("sending request, url : " + url);
+    OkHttpClient client = new OkHttpClient();
+
+
     Request request = new Request.Builder()
-            .url(url)
+            .url("http://" + hooksPrefix + "/job/" + projectName + "/build?token=" + token)
+            .get()
+            .addHeader("Authorization", auth)
             .build();
 
     Response response = client.newCall(request).execute();
     String result = response.body().string();
+
     log.debug("request result : " + result);
-    return result;
+
+    //返回结果
+    return ok(result);
   }
+
 
 }
