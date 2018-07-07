@@ -6,6 +6,6 @@ RUN mvn clean package && mkdir /app && cp -R ./target /app
 
 FROM java:8-jre
 
-COPY --from=builder /app/target/app.jar /
+COPY --from=builder /app/target /
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/target/app.jar"]
