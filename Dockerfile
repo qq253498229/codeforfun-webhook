@@ -1,6 +1,7 @@
 FROM maven:3-jdk-8-alpine as builder
 
-COPY pom.xml src ./
+COPY pom.xml /
+COPY src /src
 
 RUN mvn clean package && mkdir /app && cp -R ./target /app
 
